@@ -1,0 +1,3 @@
+[submodule "pack/plugins/start/python-mode"]
+	path = pack/plugins/start/python-mode
+	url = https://github.com/python-mode/python-mode
