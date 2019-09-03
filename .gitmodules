@@ -1,3 +1,6 @@
 [submodule "pack/plugins/start/python-mode"]
 	path = pack/plugins/start/python-mode
 	url = https://github.com/python-mode/python-mode
+[submodule "pack/plugins/start/youcompleteme"]
+	path = pack/plugins/start/youcompleteme
+	url = https://github.com/valloric/youcompleteme
