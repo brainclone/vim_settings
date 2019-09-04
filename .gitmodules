@@ -7,3 +7,6 @@
 [submodule "pack/plugins/start/lexima"]
 	path = pack/plugins/start/lexima
 	url = https://github.com/cohama/lexima.vim
+[submodule "pack/plugins/start/emmet-vim"]
+	path = pack/plugins/start/emmet-vim
+	url = git@github.com:mattn/emmet-vim.git
