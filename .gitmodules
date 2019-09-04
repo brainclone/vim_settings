@@ -4,3 +4,6 @@
 [submodule "pack/plugins/start/youcompleteme"]
 	path = pack/plugins/start/youcompleteme
 	url = https://github.com/valloric/youcompleteme
+[submodule "pack/plugins/start/lexima"]
+	path = pack/plugins/start/lexima
+	url = https://github.com/cohama/lexima.vim
