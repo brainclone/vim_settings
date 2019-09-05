@@ -1,0 +1,7 @@
+To use vdebug, you need to:
+1. venv>pip install komodo-python3-dbgp
+2. At where you want to stop the execution:
+    import dbgp.client
+    dbgp.client.brk(host="localhost", port=9000)
+3. Press <F5> in vim, and run the script using Python3 or reload the web page.
+4. Now enjoy <F12>, <F2>, <F3>, <F6>, etc!

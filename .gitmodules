@@ -10,3 +10,6 @@
 [submodule "pack/plugins/start/emmet-vim"]
 	path = pack/plugins/start/emmet-vim
 	url = git@github.com:mattn/emmet-vim.git
+[submodule "pack/plugins/start/vdebug"]
+	path = pack/plugins/start/vdebug
+	url = git@github.com:vim-vdebug/vdebug.git
