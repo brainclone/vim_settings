@@ -1,0 +1,284 @@
+" enable vim features instead of strict vi compatibility
+set nocompatible
+
+" do not wrap long lines; have them scroll off the side
+set nowrap
+
+" enable mouse for all modes.
+set mouse=a
+
+" put mouse in command-line mode, so mouse clicks don't move cursor
+"set mouse=c
+
+" turn off mouse pointer when typing begins
+set mousehide
+
+" enable syntax highlighting
+syntax enable
+" syntax on "This overides your highlight settings with default.
+
+" Turn on filetype specific settings
+filetype plugin indent on
+
+" FINDING FILES:
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" vim autocompletion option: do not auto insert when there's only one option.
+set completeopt=menuone,noinsert
+
+" NOW WE CAN:
+" - Hit tab to :find by partial match
+" - Use * to make it fuzzy
+
+" THINGS TO CONSIDER:
+" - :b lets you autocomplete any open buffer
+
+
+" TAG JUMPING:
+
+" Create the `tags` file (may need to install ctags first)
+command! MakeTags !ctags -R .
+
+" NOW WE CAN:
+" - Use ^] to jump to tag under cursor
+" - Use g^] for ambiguous tags
+" - Use ^t to jump back up the tag stack
+
+" tell vim it's OK to use 256 colors at the terminal
+set t_Co=256
+
+" don't bother redrawing during macros and such
+"set lazyredraw
+
+" show line numbers
+set number
+
+" show a visual line under the cursor's current line
+set cursorline
+
+" show the matching part of the pair for [] {} and ()
+set showmatch
+
+" sync syntax highlighting in a 5000-line window
+" syntax sync minlines=5000
+
+" sync syntax highlighting from the start of the file
+syntax sync fromstart
+
+" do not make backup~ files
+"set nobackup " Default is off.
+"set nowritebackup "This is not safe.
+
+" set character encoding to UTF-8
+set encoding=utf-8
+
+" show 3 lines above or below cursor when scrolling
+set scrolloff=3
+
+" show insert, replace, or visual mode in last line
+"set showmode " Default is on.
+
+" show command in last line
+set showcmd
+
+" flash screen on bell
+set visualbell
+
+" assumes fast connection
+set ttyfast
+
+" show line and column number
+set ruler " Shown on statusline, only controls ^G output.
+
+" make command line one line high
+set ch=1
+
+" set manni color scheme
+"colorscheme manni
+
+" set leader to comma
+let mapleader = ","
+
+" local leader to backslash. (local leader is used for only specific file
+" types)
+let maplocalleader = "\\"
+
+" Searching
+" ------------
+" Highlight matches in search
+set hlsearch
+" switch off search pattern highlighting
+"set nohlsearch
+
+" Turn off search highlight when done
+nnoremap <Leader><Space> :nohlsearch<CR>
+
+" Listing unprintable chars
+" ------------
+" Change vertical split character from a bar to a space
+" (so note that trailing space here is significant)
+"set fillchars+=vert:\ 
+
+" Show spaces and tabs; to turn off for copying, use `:set nolist`
+"set listchars=tab:→\ ,space:·,trail:·,nbsp:·
+
+" The listchars will turn tabs into large triangles, and trailing spaces
+" and blank lines with spaces into small bullets.
+set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+
+" Default to listing hidden chars
+set list
+
+" Toggle listing hidden chars
+nnoremap <Leader><CR> :set list!<CR>
+
+" Status Line
+" ------------
+" %< means truncate on the left if too long
+" %F is full path to the file we are editing
+" every window gets a status line
+set laststatus=2
+
+set statusline=%<%F
+
+" %m shows [+] if the file is modified but not saved
+set statusline+=%m
+
+" %r shows [RO] if a file is read-only
+set statusline+=%r
+
+" %h shows [Help] if we are in a help buffer
+set statusline+=%h
+
+" %w shows [Preview] if we are in a preview window
+set statusline+=%w
+
+" separation point between the left and right items
+set statusline+=%=
+
+" prints the fileformat; that is, the kind of newline (one of unix, dos or mac)
+" (If you type `:set fileformat?`, vim will tell you the current file format)
+set statusline+=%{&fileformat}
+
+" a literal forward slash
+set statusline+=/
+
+" %Y shows the filetype, such as VIM or HTML or GO
+set statusline+=%Y
+
+" %l shows the line number, and %8l uses 8 left-padded spaces to do so
+" %L shows number of lines in buffer.
+set statusline+=%8l/%L
+
+" a literal comma
+set statusline+=,
+
+" %v shows the virtual column number;
+" instead of counting a tab as one char, it counts it as the number
+" of spaces it uses in the display
+" %-8v leaves 8 spaces to the right to do so
+set statusline+=%-8v
+
+" %p ^G output of percentage of lines through file.
+set statusline+=(%p%%)
+
+" --OLD-- Status line display.
+"set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\ [%l/%L\ (%p%%)
+
+" disable recording macros: I hit this key accidentally too often
+"nnoremap q <Nop> " I need this.
+
+" Window Manipulation
+" -------------------
+" Note to self:
+" :resize will resize a horizontal split, *and* you can give it
+" relative lines, like :resize +5 or :resize -5
+" :vertical resize can be used for vertical splits.
+
+" remap window switching to leader then navigation letter
+nnoremap <Leader>j <C-W><C-J>
+nnoremap <Leader>k <C-W><C-K>
+nnoremap <Leader>l <C-W><C-L>
+nnoremap <Leader>h <C-W><C-H>
+
+" remap window equal resizing to leader equals
+nnoremap <Leader>= <C-W><C-=>
+
+" Viewport Controls, ie moving between split panes
+" ??? can't see the difference using <silent> or not
+"map <silent>,h <C-w>h
+"map <silent>,j <C-w>j
+"map <silent>,k <C-w>k
+"map <silent>,l <C-w>l
+
+" when opening horizontal splits, place cursor in new split
+set splitbelow
+
+" when opening vertical splits, place cursor in new split
+set splitright
+
+if !!exists("DestroyButKeepWindow")
+    function DestroyButKeepWindow()
+      " get the number of the buffer we will close
+      let l:current_bufnum = bufnr('%')
+      " open a new empty buffer in this window
+      enew
+      " destroy the original buffer
+      execute "bdelete " . l:current_bufnum
+    endfunction
+
+    " Make :Bd call the window closer
+    command Bd call DestroyButKeepWindow()
+endif
+
+" Explore
+" -------
+" Note to self:
+" :Explore brings up explorer
+" :Sexplore brings up explorer in a horizontal split
+" :Vexplore brings up explorer in a vertical split
+
+" FILE BROWSING:
+
+" Tweaks for browsing
+"let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_winsize = 25
+augroup ProjectDrawer
+  autocmd!
+  "autocmd SessionLoadPost :close " !!TODO!! Fix this!
+  autocmd VimEnter * :Vexplore
+augroup END
+
+" tabstop = 4 (existing tabs display as 4 spaces)
+set ts=4
+
+" expand tabs into spaces (tab key input turns into 4 spaces)
+set expandtab
+
+" when using the >> or << commands, shift lines by 4 spaces
+set shiftwidth=4
+
+" indent when moving to the next line while writing code
+set autoindent
+
+" indent after things like a colon (for if or for statements) and such.
+set smartindent
+
+" SETTINGS FOR PLUGINS. More settings in ~/.vim/after directory for
+" after-plugin-loaded occasion.
+source $HOME/.vim/rc/python_mode.vim
+
+" lexima settings "The default is on for ruby.
+autocmd filetype py let g:lexima_enable_newline_rules = 0
+autocmd filetype py let g:lexima_enable_endwise_rules = 0
