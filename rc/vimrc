@@ -13,6 +13,8 @@ set mouse=a
 " turn off mouse pointer when typing begins
 set mousehide
 
+" GUI (gvim) font and size
+set guifont=Monospace\ 11
 " enable syntax highlighting
 syntax enable
 " syntax on "This overides your highlight settings with default.
@@ -101,6 +103,7 @@ set ch=1
 
 " set manni color scheme
 "colorscheme manni
+colorscheme torte
 
 " set leader to comma
 let mapleader = ","
@@ -275,10 +278,37 @@ set autoindent
 " indent after things like a colon (for if or for statements) and such.
 set smartindent
 
+" PEP-8 Friendly "Should already be in python-mode
+"set textwidth=79 
+
+" enable all Python syntax highlighting features
+"let python_highlight_all = 1 "Let's see if it's done already in python-mode
+
 " SETTINGS FOR PLUGINS. More settings in ~/.vim/after directory for
 " after-plugin-loaded occasion.
 source $HOME/.vim/rc/python_mode.vim
 
-" lexima settings "The default is on for ruby.
+" lexima settings for PYTHON "The default is on for ruby.
 autocmd filetype py let g:lexima_enable_newline_rules = 0
 autocmd filetype py let g:lexima_enable_endwise_rules = 0
+" lexima rules for HTML for '%','<','<Space>'
+  "'  \ 'input_after': '<Space><Space>%',
+"autocmd filetype html call lexima#add_rule({
+"    \ 'char': '%',
+"    \ 'at': '{\%#}',
+"    \ 'input_after': '<Space><Space>%',
+"    \ 'mode': 'i',
+"    \ 'leave': 1,
+"    \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
+"    \ })
+autocmd filetype html call lexima#add_rule({
+    \ 'char': '<',
+    \ 'input_after': '>',
+    \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
+    \ })
+autocmd filetype html call lexima#add_rule({
+    \ 'char': '<Space>',
+    \ 'at': '{{\%#',
+    \ 'input_after': '<Space>',
+    \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
+    \ })

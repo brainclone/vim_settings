@@ -1,0 +1,304 @@
+TUTORIAL                                                      *emmet-tutorial*
+
+If you are seeing this file as :help, then you can't edit this file.
+You should copy this section and create new buffer, paste and write as
+'emmet-tutor.txt'. Formally, open the file to start tutorial.
+
+1. Expand abbreviation                            *emmet-expand-abbr* *<C-y>,*
+
+  Type abbreviation as 'div>p#foo$*3>a' and type '<C-y>,'.
+>
+  <div>
+      <p id="foo1">
+          <a href=""></a>
+      </p>
+      <p id="foo2">
+          <a href=""></a>
+      </p>
+      <p id="foo3">
+          <a href=""></a>
+      </p>
+  </div>
+<
+2. Expand word                                    *emmet-expand-word* *<C-y>;*
+
+  When you want to expand word except html tokens like below, use this.
+>
+  <html>foo
+<
+  This will be expanded like:
+>
+  <html><foo></foo>
+<
+3. Update tag                                     *emmet-update-tag* *<C-y>u*
+
+  The beginning of tags '<div>' on below
+>
+  <div>foo</div>
+<
+  Type '<C-y>u' request 'Enter Abbreviation:'. Then type
+>
+  .global
+<
+  This will be expanded like:
+>
+  <div class="global">foo</div>
+<
+4. Wrap with abbreviation            *emmet-wrap-with-abbreviation* *v_<C-y>,*
+
+  Write as below.
+>
+  test1
+  test2
+  test3
+<
+  Then do visual select (line wise) and type '<C-y>,'.
+  If you request 'Tag:', then type
+>
+  ul>li*
+<
+  Result:
+>
+  <ul>
+      <li>test1</li>
+      <li>test2</li>
+      <li>test3</li>
+  </ul>
+<
+  If you type tag name, for example
+>
+  blockquote
+<
+  then you'll see as following:
+>
+  <blockquote>
+      test1
+      test2
+      test3
+  </blockquote>
+<
+  See also: |emmet-filter-t|, |emmet-$#|
+
+5. Balance tag inward                      *emmet-balance-tag-inward* *<C-y>d*
+
+  To select inward of '<ul>' tag, type '<C-y>d' in insert mode.
+>
+  <ul>
+  *   <li class="list1"></li>
+      <li class="list2"></li>
+      <li class="list3"></li>
+  </ul>
+<
+  If cursor is at '*', '<C-y>d' select from begin of '<ul>' to end of '</ul>'.
+  If cursor is at first of '<li>', it select '<li class="list1"></li>'.
+
+6. Balance tag outward                    *emmet-balance-tag-outward* *<C-y>D*
+
+  To select outward of '<ul>' tag type '<C-y>D' in insert mode.
+>
+  <ul>
+    * <li class="list1"></li>
+      <li class="list2"></li>
+      <li class="list3"></li>
+  </ul>
+<
+  If cursor is at '*', '<C-y>D' select from next letter of '<ul>'
+  to previous letter of '</ul>'.
+  If cursor is at first of '<li>', it select '<li class="list1"></li>'.
+
+7. Go to next edit point                      *emmet-goto-next-point* *<C-y>n*
+
+  To jump next point that need to edit, type '<C-y>n' in insert mode.
+>
+  * <div id="foo" class="">foo</div>
+    <div id="bar" class="bar"></div>
+<
+  If cursor is at '*', type '<C-y>n' to move a cursor
+  into attribute value of '<div>' specified id as 'foo'.
+  And type again '<C-y>n' to move a cursor
+  into inner of '<div>' specified id as 'bar'.
+
+8. Go to previous edit point              *emmet-goto-previous-point* *<C-y>N*
+
+  To jump previous point that need to edit, type '<C-y>N' in insert mode.
+>
+  <div id="foo" class="">foo</div>
+  <div id="bar" class="bar"></div> *
+<
+  If cursor is at '*', type '<C-y>N' to move a cursor
+  into '<div>' specified id as 'bar'.
+  And type again '<C-y>N' to move a cursor
+  into attribute value of 'foo'.
+
+9. Add and update <img> size                *emmet-update-image-size* *<C-y>i*
+
+  To add or update 'width' and 'height' attributes of image,
+  type '<C-y>i' on '<img>' tag
+>
+  <img src="foo.png" />
+<
+  Type '<C-y>i' on '<img>' tag
+>
+  <img src="foo.png" width="32" height="32" />
+<
+  If you change image, then type it again. it will be following.
+>
+  <img src="foo-48.png" width="32" height="48" />
+<
+  Image size retrieved using 'identify' (ImageMagick.org) (if available)
+  or |xxd|.
+
+10. Merge lines                                    *emmet-merge-lines* *<C-y>m*
+
+  To join multi line text like following, type |J|.
+>
+  <ul>
+      <li class="list1"></li>
+      <li class="list2"></li>
+      <li class="list3"></li>
+  </ul>
+<
+  If you select part of line include '<li>' and type |<C-y>m|,
+  it will be following.
+>
+  <ul>
+      <li class="list1"></li><li class="list2"></li><li class="list3"></li>
+  </ul>
+<
+11. Remove tag                                      *emmet-remove-tag* *<C-y>k*
+
+  To remove tag in the block, type '<C-y>k'.
+>
+  <div class="foo">
+      <a>cursor is here</a>
+  </div>
+<
+  Type '<C-y>k' in insert mode, then
+>
+  <div class="foo">
+
+  </div>
+<
+  And type '<C-y>k' in there again, then '<div>' will be removed.
+
+12. Split/join tag                             *emmet-split-join-tag* *<C-y>j*
+
+  To join block, type '<C-y>j'.
+>
+  <div class="foo">
+      cursor is here
+  </div>
+<
+  Type '<C-y>j' in insert mode. Then,
+>
+  <div class="foo" />
+<
+  And type '<C-y>j' in there again.
+>
+  <div class="foo">
+  </div>
+<
+13. Toggle comment                             *emmet-toggle-comment* *<C-y>/*
+
+  Move cursor to block
+>
+  <div>
+      hello world
+  </div>
+<
+  Type '<C-y>/' in insert mode.
+>
+  <!-- <div>
+      hello world
+  </div> -->
+<
+  Type '<C-y>/' in there again.
+>
+  <div>
+      hello world
+  </div>
+<
+14. Make anchor from URL                      *emmet-make-anchor-url* *<C-y>a*
+
+  Move cursor to URL
+>
+  http://www.google.com/
+<
+  Type '<C-y>a'
+>
+  <a href="http://www.google.com/">Google</a>
+<
+  Text retrieved using command, specified by |g:emmet_curl_command|.
+
+15. Make quoted text from URL                 *emmet-quoted-text-url* *<C-y>A*
+
+  Move cursor to URL
+>
+  https://github.com/
+<
+  Type '<C-y>A'
+>
+  <blockquote class="quote">
+      <a href="https://github.com/">Secure source code hosting and collaborative development - GitHub</a><br />
+      <p>How does it work? Get up and running in seconds by forking a project, pushing an existing repository...</p>
+      <cite>https://github.com/</cite>
+  </blockquote>
+<
+  Text retrieved using command, specified by |g:emmet_curl_command|.
+
+16. Code pretty                                   *emmet-code-pretty* *<C-y>c*
+
+  Select code block, for example select following code from 'int main()'.
+>
+  <p>Writing in C language</p>
+
+  int main() {
+    puts("hello world");
+  }
+<
+  Type '<C-y>c'
+>
+  <span class="Type">int</span>&nbsp;main() {<br />
+  &nbsp;&nbsp;puts(<span class="Constant">&quot;hello world&quot;</span>);<br />
+  }<br />
+<
+  To convert text into html used command |:TOhtml|.
+
+17. Lorem ipsum                                            *emmet-lorem-ipsum*
+
+  To insert dummy text (30 words by default).
+>
+  div>lorem
+<
+  Type |<C-y>,|
+>
+  <div>Adipisicing asperiores deleniti ipsum fuga deserunt perferendis
+  molestiae sunt excepturi aut quo nihil! Optio accusantium corporis molestiae
+  deserunt ab, veritatis commodi. Eius nobis ab deserunt magni iure quo
+  laboriosam laboriosam.</div>
+<
+  For japanese user, put like follow into your |g:user_emmet_settings|:
+>
+  let g:user_emmet_settings = {
+    ...
+
+    \  'custom_expands1' : {
+    \    '^\%(lorem\|lipsum\)\(\d*\)$' : function('emmet#lorem#ja#expand'),
+    \  },
+
+    ...
+<
+  You will get japanese dummy text. Text retrieved from url
+  'http://www.aozora.gr.jp/cards/000081/files/470_15407.html'
+  using command, specified by |g:emmet_curl_command|.
+
+  To insert 3 words of dummy text.
+>
+  div>lorem3
+<
+  Type |<C-y>,|
+>
+  <div>
+      Elit libero id.
+  </div>
+<
